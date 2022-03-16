@@ -1,6 +1,6 @@
-defmodule Backend do
+defmodule Recepcion do
   @moduledoc """
-  Documentation for `Backend`.
+  Documentation for `Recepcion`.
   """
 
   use GenServer
@@ -22,12 +22,11 @@ defmodule Backend do
   end
 
   def handle_call({:validate, afirmacion}, _from, 0) do
-    case afirmacion do
-    	true ->	{:reply, true, 0}
-    
-    	false -> {:reply, false, 0}
-
-    	_ -> {:reply, :error, 0}
+    if is_binary(afirmacion) do
+    	
+      {:reply, GenServer.call(:busqueda, {:validate, afirmacion}), 0}
+    else
+      {:reply, :error, 0}
     end
   end
 

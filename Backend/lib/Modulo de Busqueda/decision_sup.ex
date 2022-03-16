@@ -1,6 +1,6 @@
-defmodule BackendSup do
+defmodule DecisionSup do
     @moduledoc """
-    Documentation for `BackendSup`.
+    Documentation for `DecisionSup`.
     """
   
     use Supervisor
@@ -17,7 +17,7 @@ defmodule BackendSup do
         
         child = [%{
             id: Backend,
-            start: {Backend, :new, []}
+            start: {Decision, :new, []}
           }]
 
         Supervisor.init(child, strategy: :one_for_one)        
