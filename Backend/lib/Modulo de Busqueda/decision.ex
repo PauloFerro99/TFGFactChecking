@@ -17,18 +17,18 @@ defmodule Decision do
     {:ok, 0}
   end
 
-  def handle_call({:validate, afirmacion}, _from, 0) do
+  def handle_cast({:validate, afirmacion}, 0) do
     case afirmacion do
       "pdf" ->
-            {:reply, GenServer.call(:pdf, {:validate, afirmacion}), 0} 
+            GenServer.cast(:pdf, {:validate, afirmacion})
       "api" ->
-            {:reply, GenServer.call(:api, {:validate, afirmacion}), 0} 
+            GenServer.cast(:api, {:validate, afirmacion})
       "web" ->
-            {:reply, GenServer.call(:web, {:validate, afirmacion}), 0} 
+            GenServer.cast(:web, {:validate, afirmacion})
       _ -> 
-            {:reply, GenServer.call(:web, {:validate, afirmacion}), 0} 
+            GenServer.cast(:web, {:validate, afirmacion})
     end
-    
+    {:noreply, 0}
   end
 
 end

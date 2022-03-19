@@ -12,7 +12,7 @@ defmodule Recepcion do
   end
 
   def validar(afirmacion) do
-    GenServer.call(:server, {:validate, afirmacion})
+    GenServer.cast(:server, {:validate, afirmacion})
   end
 
   # Callbacks GenServer
@@ -21,13 +21,11 @@ defmodule Recepcion do
     {:ok, 0}
   end
 
-  def handle_call({:validate, afirmacion}, _from, 0) do
+  def handle_cast({:validate, afirmacion}, 0) do
     if is_binary(afirmacion) do
-    	
-      {:reply, GenServer.call(:busqueda, {:validate, afirmacion}), 0}
-    else
-      {:reply, :error, 0}
+      GenServer.cast(:busqueda, {:validate, afirmacion})
     end
+    {:noreply, 0}
   end
 
 end

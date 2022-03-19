@@ -17,13 +17,13 @@ defmodule BusquedaPDF do
     {:ok, 0}
   end
 
-  def handle_call({:validate, afirmacion}, _from, 0) do
+  def handle_cast({:validate, afirmacion}, 0) do
     case afirmacion do
 
       _ -> 
-            {:reply, "Non se puido saber", 0}
+            GenServer.cast(:exit, {:validate, "Non se puido saber"})
     end
-
+    {:noreply, 0}
   end
 
 end
