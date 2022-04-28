@@ -1,4 +1,4 @@
-defmodule BusquedaAPISup do
+defmodule IgeSup do
   @moduledoc """
   Documentation for `BusquedaAPISup`.
   """
@@ -17,7 +17,7 @@ defmodule BusquedaAPISup do
     child = [
       %{
         id: Backend,
-        start: {BusquedaAPI, :new, []}
+        start: {Ige, :new, []}
       }
     ]
 

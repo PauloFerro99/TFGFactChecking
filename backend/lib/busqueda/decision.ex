@@ -17,18 +17,9 @@ defmodule Decision do
     {:ok, 0}
   end
 
-  def handle_cast({:validate, "pdf"}, 0) do
-    GenServer.cast(:pdf, {:validate, "pdf"})
+  def handle_cast({:validate, "ige"}, 0) do
+    GenServer.cast(:ige, {:validate, "ige"})
     {:noreply, 0}
   end
 
-  def handle_cast({:validate, "api"}, 0) do
-    GenServer.cast(:api, {:validate, "api"})
-    {:noreply, 0}
-  end
-
-  def handle_cast({:validate, "web"}, 0) do
-    GenServer.cast(:web, {:validate, "web"})
-    {:noreply, 0}
-  end
 end

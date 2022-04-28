@@ -1,15 +1,19 @@
-defmodule BusquedaAPI do
+defmodule Ige do
   @moduledoc """
-  Documentation for `BusquedaAPI`.
+  Documentation for `ige`.
   """
 
   use GenServer
   require Logger
 
+  use Tesla
+
+  plug Tesla.Middleware.JSON, engine: Poison
+
   # Public API
 
   def new() do
-    GenServer.start_link(__MODULE__, 0, [{:name, :api}])
+    GenServer.start_link(__MODULE__, 0, [{:name, :ige}])
   end
 
   # Callbacks GenServer
@@ -22,6 +26,9 @@ defmodule BusquedaAPI do
     Logger.debug(
       "[#{inspect(__MODULE__)}, process #{inspect(self())}] Non se puido validar #{inspect(afirmacion)}"
     )
+
+    {:ok, response} = get("https://www.ige.gal/igebdt/igeapi/jsonstat/datos/5261")
+    GenServer.cast(:exit, {:validate, response.body})
 
     {:noreply, 0}
   end
