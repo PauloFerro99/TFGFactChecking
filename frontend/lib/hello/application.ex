@@ -20,6 +20,11 @@ defmodule Hello.Application do
       # {Hello.Worker, arg}
     ]
 
+    RecepcionSup.new()
+    DecisionSup.new()
+    SalidaSup.new()
+    IgeSup.new()
+
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Hello.Supervisor]

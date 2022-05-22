@@ -1,6 +1,6 @@
 defmodule IgeSup do
   @moduledoc """
-  Documentation for `BusquedaAPISup`.
+  Documentation for `IgeSup`.
   """
 
   use Supervisor
