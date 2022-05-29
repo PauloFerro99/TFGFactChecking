@@ -1,11 +1,11 @@
-defmodule HelloWeb.Router do
-  use HelloWeb, :router
+defmodule FactcheckWeb.Router do
+  use FactcheckWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {HelloWeb.LayoutView, :root}
+    plug :put_root_layout, {FactcheckWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -14,7 +14,7 @@ defmodule HelloWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", HelloWeb do
+  scope "/", FactcheckWeb do
     pipe_through :browser
 
     get "/", PageController, :index
@@ -22,7 +22,7 @@ defmodule HelloWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", HelloWeb do
+  # scope "/api", FactcheckWeb do
   #   pipe_through :api
   # end
 
@@ -38,7 +38,7 @@ defmodule HelloWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: HelloWeb.Telemetry
+      live_dashboard "/dashboard", metrics: FactcheckWeb.Telemetry
     end
   end
 

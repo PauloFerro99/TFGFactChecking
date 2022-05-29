@@ -1,5 +1,5 @@
-defmodule Hello.Repo do
+defmodule Factcheck.Repo do
   use Ecto.Repo,
-    otp_app: :hello,
+    otp_app: :factcheck,
     adapter: Ecto.Adapters.Postgres
 end

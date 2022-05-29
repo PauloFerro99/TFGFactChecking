@@ -1,4 +1,4 @@
-defmodule Hello do
+defmodule Factcheck do
   @moduledoc """
   Hello keeps the contexts that define your domain
   and business logic.

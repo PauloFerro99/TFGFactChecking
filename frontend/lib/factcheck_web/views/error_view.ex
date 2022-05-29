@@ -1,5 +1,5 @@
-defmodule HelloWeb.ErrorView do
-  use HelloWeb, :view
+defmodule FactcheckWeb.ErrorView do
+  use FactcheckWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.
