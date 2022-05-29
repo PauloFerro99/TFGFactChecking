@@ -1,4 +1,4 @@
-defmodule HelloWeb do
+defmodule FactcheckWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
@@ -19,19 +19,19 @@ defmodule HelloWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: HelloWeb
+      use Phoenix.Controller, namespace: FactcheckWeb
 
       import Plug.Conn
-      import HelloWeb.Gettext
-      alias HelloWeb.Router.Helpers, as: Routes
+      import FactcheckWeb.Gettext
+      alias FactcheckWeb.Router.Helpers, as: Routes
     end
   end
 
   def view do
     quote do
       use Phoenix.View,
-        root: "lib/hello_web/templates",
-        namespace: HelloWeb
+        root: "lib/factcheck_web/templates",
+        namespace: FactcheckWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -45,7 +45,7 @@ defmodule HelloWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {HelloWeb.LayoutView, "live.html"}
+        layout: {FactcheckWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
     end
@@ -72,7 +72,7 @@ defmodule HelloWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import HelloWeb.Gettext
+      import FactcheckWeb.Gettext
     end
   end
 
@@ -87,9 +87,9 @@ defmodule HelloWeb do
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
-      import HelloWeb.ErrorHelpers
-      import HelloWeb.Gettext
-      alias HelloWeb.Router.Helpers, as: Routes
+      import FactcheckWeb.ErrorHelpers
+      import FactcheckWeb.Gettext
+      alias FactcheckWeb.Router.Helpers, as: Routes
     end
   end
 

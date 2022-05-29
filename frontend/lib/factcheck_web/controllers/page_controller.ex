@@ -1,5 +1,5 @@
-defmodule HelloWeb.PageController do
-  use HelloWeb, :controller
+defmodule FactcheckWeb.PageController do
+  use FactcheckWeb, :controller
 
   def index(conn, _params) do
     render(conn, "index.html")

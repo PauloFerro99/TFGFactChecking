@@ -1,7 +1,7 @@
 import Config
 
 # Configure your database
-config :hello, Hello.Repo,
+config :factcheck, Factcheck.Repo,
   username: "postgres",
   password: "postgres",
   database: "hello_dev",
@@ -15,7 +15,7 @@ config :hello, Hello.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
-config :hello, HelloWeb.Endpoint,
+config :factcheck, FactcheckWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
@@ -53,13 +53,13 @@ config :hello, HelloWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :hello, HelloWeb.Endpoint,
+config :factcheck, FactcheckWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/hello_web/(live|views)/.*(ex)$",
-      ~r"lib/hello_web/templates/.*(eex)$"
+      ~r"lib/factcheck_web/(live|views)/.*(ex)$",
+      ~r"lib/factcheck_web/templates/.*(eex)$"
     ]
   ]
 

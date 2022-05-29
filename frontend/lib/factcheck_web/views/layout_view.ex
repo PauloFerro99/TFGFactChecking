@@ -1,5 +1,5 @@
-defmodule HelloWeb.LayoutView do
-  use HelloWeb, :view
+defmodule FactcheckWeb.LayoutView do
+  use FactcheckWeb, :view
 
   # Phoenix LiveDashboard is available only in development by default,
   # so we instruct Elixir to not warn if the dashboard route is missing.

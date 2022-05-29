@@ -7,14 +7,14 @@
 # General application configuration
 import Config
 
-config :hello,
-  ecto_repos: [Hello.Repo]
+config :factcheck,
+  ecto_repos: [Factcheck.Repo]
 
 # Configures the endpoint
-config :hello, HelloWeb.Endpoint,
+config :factcheck, FactcheckWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: HelloWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Hello.PubSub,
+  render_errors: [view: FactcheckWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Factcheck.PubSub,
   live_view: [signing_salt: "3cmcatNd"]
 
 # Configures the mailer
@@ -24,7 +24,7 @@ config :hello, HelloWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :hello, Hello.Mailer, adapter: Swoosh.Adapters.Local
+config :factcheck, Factcheck.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
