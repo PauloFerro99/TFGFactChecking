@@ -22,12 +22,14 @@ defmodule Recepcion do
     {:ok, 0}
   end
 
-  def handle_cast({:validate, afirmacion}, 0) when is_binary(afirmacion) do
-    Logger.debug(
-      "[#{inspect(__MODULE__)}, process #{inspect(self())}] Recíbese petición #{inspect(afirmacion)}"
-    )
+  def handle_cast({:validate, afirmacion}, 0) do
+    if is_binary(afirmacion[:texto]) do
+      Logger.debug(
+        "[#{inspect(__MODULE__)}, process #{inspect(self())}] Recíbese petición #{inspect(afirmacion)}"
+      )
 
-    GenServer.cast(:busqueda, {:validate, afirmacion})
+      GenServer.cast(:busqueda, {:validate, afirmacion})
+    end
     {:noreply, 0}
   end
 end

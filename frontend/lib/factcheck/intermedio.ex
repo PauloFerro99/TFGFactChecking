@@ -4,7 +4,7 @@ defmodule Intermedio do
   """
 
   def buscar(texto) do
-  	Recepcion.validar(texto)
+  	Recepcion.validar(%{:texto => texto, :canal => Factcheck.PubSub})
   	
   end
 

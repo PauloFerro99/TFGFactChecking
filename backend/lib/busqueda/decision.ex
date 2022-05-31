@@ -17,8 +17,10 @@ defmodule Decision do
     {:ok, 0}
   end
 
-  def handle_cast({:validate, "ige"}, 0) do
-    GenServer.cast(:ige, {:validate, "ige"})
+  def handle_cast({:validate, afirmacion}, 0) do
+    if afirmacion[:texto] == "ige" do
+      GenServer.cast(:ige, {:validate, afirmacion})
+    end
     {:noreply, 0}
   end
 

@@ -28,7 +28,7 @@ defmodule Ige do
     )
 
     {:ok, response} = get("https://www.ige.gal/igebdt/igeapi/jsonstat/datos/5261")
-    GenServer.cast(:exit, {:validate, response.body})
+    GenServer.cast(:exit, {:validate, %{:texto => response.body, :canal => afirmacion[:canal]}})
 
     {:noreply, 0}
   end
