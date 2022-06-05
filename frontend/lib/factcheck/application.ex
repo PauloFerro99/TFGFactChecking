@@ -19,11 +19,13 @@ defmodule Factcheck.Application do
       # Start a worker by calling: Factcheck.Worker.start_link(arg)
       # {Factcheck.Worker, arg}
     ]
-
+    
+    ResultadoSup.new()
     RecepcionSup.new()
     DecisionSup.new()
     SalidaSup.new()
     IgeSup.new()
+    
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options

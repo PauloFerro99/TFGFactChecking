@@ -10,4 +10,9 @@ defmodule FactcheckWeb.PageController do
     render(conn, "procc.html")
   end
 
+  def result(conn, _params) do
+    lista = Resultado.resultados()
+    render(conn, "result.html", list: lista)
+  end
+
 end

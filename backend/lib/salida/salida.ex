@@ -20,7 +20,7 @@ defmodule Salida do
 
   def handle_cast({:validate, res}, 0) do
     Logger.debug("[#{inspect(__MODULE__)}, process #{inspect(self())}] A saída é #{inspect(res[:texto])}")
-    Phoenix.PubSub.broadcast(res[:canal], "TFG", {:res, %{res: res[:texto]}})
+    Phoenix.PubSub.broadcast(res[:canal], "TFG", {:res, res[:texto]})
     {:noreply, 0}
   end
 end

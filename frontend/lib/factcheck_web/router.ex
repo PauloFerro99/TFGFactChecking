@@ -19,6 +19,7 @@ defmodule FactcheckWeb.Router do
 
     get "/", PageController, :index
     get "/search/", PageController, :proccessing
+    get "/result/", PageController, :result
   end
 
   # Other scopes may use custom stacks.

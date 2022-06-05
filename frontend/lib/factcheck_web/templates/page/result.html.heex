@@ -1,0 +1,8 @@
+<body>
+  <h1>Resultados das súas búsquedas</h1>
+  <%= for number <- 0..length(@list) do %>
+  <br> <%= Enum.at(@list, number) %>
+  <br>
+  <% end %>
+</body>
+
