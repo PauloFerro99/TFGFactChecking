@@ -7,7 +7,7 @@ defmodule ResultadoSup do
 
   # Public API
 
-  def new() do
+  def start_link(arg) do
     Supervisor.start_link(__MODULE__, [], name: __MODULE__)
   end
 

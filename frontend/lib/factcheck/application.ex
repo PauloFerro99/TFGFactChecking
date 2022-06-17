@@ -15,16 +15,12 @@ defmodule Factcheck.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Factcheck.PubSub},
       # Start the Endpoint (http/https)
-      FactcheckWeb.Endpoint
+      FactcheckWeb.Endpoint,
       # Start a worker by calling: Factcheck.Worker.start_link(arg)
       # {Factcheck.Worker, arg}
+      {ResultadoSup, []}
     ]
     
-    ResultadoSup.new()
-    RecepcionSup.new()
-    DecisionSup.new()
-    SalidaSup.new()
-    IgeSup.new()
     
 
     # See https://hexdocs.pm/elixir/Supervisor.html
