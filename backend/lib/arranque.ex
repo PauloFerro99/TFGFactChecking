@@ -3,7 +3,9 @@ defmodule Arranque do
   # for more information on OTP Applications
   @moduledoc false
 
-  def start() do
+  use Application
+
+  def start(_type, _args) do
     RecepcionSup.new()
     DecisionSup.new()
     IgeSup.new()
