@@ -3,8 +3,8 @@ defmodule Intermedio do
   Documentation for `Intermedio`.
   """
 
-  def buscar(texto, tipo) do
-  	Recepcion.validar(%{:texto => texto, :canal => Factcheck.PubSub, :tipo => tipo})
+  def buscar(map) do
+  	Recepcion.validar(map)
   	
   end
 

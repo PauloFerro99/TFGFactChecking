@@ -26,10 +26,12 @@ defmodule Ige do
     Logger.debug(
       "[#{inspect(__MODULE__)}, process #{inspect(self())}] Non se puido validar #{inspect(afirmacion)}"
     )
-
-    {:ok, response} = get("https://www.ige.gal/igebdt/igeapi/jsonstat/datos/5261")
-    GenServer.cast(:exit, {:validate, %{:texto => response.body, :canal => afirmacion[:canal]}})
-
+    
+    case afirmacion do
+      %{tipo: :poblacion, lugar: :corunha, ano: 2011} ->
+        {:ok, response} = get("https://www.ige.eu/igebdt/igeapi/jsonstat/datos/5261/0:1,1:0,2:0,3:2011,9912:15")
+        GenServer.cast(:exit, {:validate, %{:texto => response.body, :canal => afirmacion[:canal]}})
+    end
     {:noreply, 0}
   end
 end

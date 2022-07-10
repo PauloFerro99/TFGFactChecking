@@ -6,7 +6,7 @@ defmodule FactcheckWeb.PageController do
   end
 
   def proccessing(conn, params) do
-    Intermedio.buscar(Map.get(params, "data"), :poblacion)
+    Intermedio.buscar(%{:texto => Map.get(params, "data"), :canal => Factcheck.PubSub, :tipo => :poblacion, :lugar => :corunha, :ano => 2011})
     render(conn, "procc.html")
   end
 
