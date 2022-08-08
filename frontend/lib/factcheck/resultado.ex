@@ -28,7 +28,7 @@ defmodule Resultado do
   end
 
   def handle_info({:res, texto}, state) do
-    updated_state = ["resultado X" | state] 
+    updated_state = [texto | state] 
     {:noreply, updated_state}
   end
 end

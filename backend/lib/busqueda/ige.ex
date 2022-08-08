@@ -30,7 +30,10 @@ defmodule Ige do
     case afirmacion do
       %{tipo: :poblacion, lugar: :corunha, ano: 2011} ->
         {:ok, response} = get("https://www.ige.eu/igebdt/igeapi/jsonstat/datos/5261/0:1,1:0,2:0,3:2011,9912:15")
-        GenServer.cast(:exit, {:validate, %{:texto => response.body, :canal => afirmacion[:canal]}})
+	ini = elem(:binary.match(String.to_charlist(response.body), "["), 0)
+	fin = elem(:binary.match(String.to_charlist(response.body), "]"), 0)
+	respuesta = String.slice(response.body, ini, fin - ini)
+        GenServer.cast(:exit, {:validate, %{:texto => respuesta, :canal => afirmacion[:canal]}})
     end
     {:noreply, 0}
   end
