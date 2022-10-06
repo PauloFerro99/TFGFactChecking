@@ -4,6 +4,7 @@ defmodule Decision do
   """
 
   use GenServer
+  require Logger
 
   # Public API
 
@@ -18,8 +19,13 @@ defmodule Decision do
   end
 
   def handle_cast({:validate, afirmacion}, 0) do
-    if afirmacion[:tipo] == :poblacion do
-      GenServer.cast(:ige, {:validate, afirmacion})
+    case afirmacion[:tipo] do
+	:poblacion -> GenServer.cast(:ige, {:validate, afirmacion})
+	:paro -> 
+		Logger.debug(
+        		"[#{inspect(__MODULE__)}, process #{inspect(self())}] Recíbese petición #{inspect(afirmacion)}"
+      		)		
+		GenServer.cast(:datosmacro, {:validate, afirmacion})
     end
     {:noreply, 0}
   end

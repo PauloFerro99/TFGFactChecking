@@ -9,6 +9,7 @@ defmodule Arranque do
     RecepcionSup.new()
     DecisionSup.new()
     IgeSup.new()
+    DatosmacroSup.new()
     SalidaSup.new()
   end
 
