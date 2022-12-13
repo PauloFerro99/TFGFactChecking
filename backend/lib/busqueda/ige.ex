@@ -29,7 +29,7 @@ defmodule Ige do
     
     case afirmacion do
       %{tipo: :poblacion, lugar: :corunha, ano: 2011} ->
-        {:ok, response} = get("https://www.ige.eu/igebdt/igeapi/jsonstat/datos/5261/0:1,1:0,2:0,3:2011,9912:15")
+        {:ok, response} = get("https://www.ige.gal/igebdt/igeapi/jsonstat/datos/5261/0:1,1:0,2:0,3:2011,9912:15")
 	Logger.debug("#{inspect(response.body)}")
 	k = List.first(Map.keys(response.body))
 	map = Map.get(response.body, k)

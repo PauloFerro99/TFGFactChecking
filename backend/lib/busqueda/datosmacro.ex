@@ -28,13 +28,51 @@ defmodule Datosmacro do
     )
     
     case afirmacion do
-      %{tipo: :paro, lugar: :espanha, ano: 2022} ->
+      %{tipo: :paro, lugar: :espanha} ->
         {:ok, response} = get("https://datosmacro.expansion.com/paro/espana")
+	{:ok, document} = Floki.parse_document(response.body)
+	a = Floki.find(document, "table tr")
+	b = Enum.map(a, &parse/1)
+	Logger.debug("#{inspect(b)}")
+	c = Enum.find(b, &aux/1)
+	Logger.debug("#{inspect(c)}")
+	res = Map.get(c, :total)
+	Logger.debug("#{inspect(res)}")
 	Logger.debug(
         	"[#{inspect(__MODULE__)}, process #{inspect(self())}] Recíbese petición #{inspect(afirmacion)}"
       	)	
-        GenServer.cast(:exit, {:validate, %{:texto => "Respuesta 2", :canal => afirmacion[:canal]}})
+        GenServer.cast(:exit, {:validate, %{:texto => res, :canal => afirmacion[:canal]}})
     end
     {:noreply, 0}
+  end
+
+  defp parse(
+      {"tr", _, 
+        [
+          {"td", _, [{_, _, [tipo]}]}, 
+          {"td", _, [total]}, 
+          {"td", _, [hombres]}, 
+          {"td", _, [mujeres]}
+        ]
+      }
+    ) do
+    %{tipo: tipo, total: total, hombres: hombres, mujeres: mujeres}
+  end
+
+  defp parse(_) do
+     %{}
+  end
+
+
+  defp aux(map) do
+    if Map.has_key?(map, :tipo) do
+      if (Map.get(map, :tipo) == "Tasa de desempleo [+]") do
+        true
+      else
+        false
+      end
+    else
+      false
+    end
   end
 end
