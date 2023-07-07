@@ -33,7 +33,7 @@ defmodule Ige do
 	Logger.debug("#{inspect(response.body)}")
 	k = List.first(Map.keys(response.body))
 	map = Map.get(response.body, k)
-        GenServer.cast(:exit, {:validate, %{:texto => List.first(Map.get(map, "value")), :canal => afirmacion[:canal]}})
+        GenServer.cast(:exit, {:validate, %{:texto => List.first(Map.get(map, "value")), :canal => afirmacion[:canal], :datanum => afirmacion[:datanum]}})
     end
     {:noreply, 0}
   end

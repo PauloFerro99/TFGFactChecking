@@ -41,7 +41,7 @@ defmodule Datosmacro do
 	Logger.debug(
         	"[#{inspect(__MODULE__)}, process #{inspect(self())}] Recíbese petición #{inspect(afirmacion)}"
       	)	
-        GenServer.cast(:exit, {:validate, %{:texto => res, :canal => afirmacion[:canal]}})
+        GenServer.cast(:exit, {:validate, %{:texto => res, :canal => afirmacion[:canal], :datanum => afirmacion[:datanum]}})
     end
     {:noreply, 0}
   end
