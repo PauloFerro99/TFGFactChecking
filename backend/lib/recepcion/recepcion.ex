@@ -9,11 +9,11 @@ defmodule Recepcion do
   # Public API
 
   def new() do
-    GenServer.start_link(__MODULE__, 0, [{:name, :server}])
+    GenServer.start_link(__MODULE__, 0, [{:name, :rec}])
   end
 
   def validar(afirmacion) do
-    GenServer.cast(:server, {:validate, afirmacion})
+    GenServer.cast(:rec, {:validate, afirmacion})
   end
 
   # Callbacks GenServer
