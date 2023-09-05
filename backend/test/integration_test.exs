@@ -4,33 +4,41 @@ defmodule IntegrationTest do
   use GenServer
 
 
-  test "Saida correcta" do
-    IO.puts("TEST 4")
+  test "Saidas ige" do
+  #Creamos canle pubsub de test
+    IO.puts("TEST IGE")
     children = [
       {Phoenix.PubSub, name: Test2.PubSub}
     ]
     opts = [strategy: :one_for_one, name: :testsupervisor]
     Supervisor.start_link(children, opts)
 
-    Recepcion.new()
+  #Arrancamos os procesos do pipeline
+    RecepcionSup.new()
     pidr = Process.whereis(:rec)
 
-    Decision.new()
+    DecisionSup.new()
     pidd = Process.whereis(:busqueda)
 
-    Ige.new()
+    IgeSup.new()
     pidi = Process.whereis(:ige)
 
-    Salida.new()
+    SalidaSup.new()
     pids = Process.whereis(:exit)
 
-    new()
-
+  #Lanzamos as consultas
     GenServer.cast(:rec, {:validate, %{:texto => "Poboación total que naceu e vive na Coruña", :datanum => "600831", :canal => Test2.PubSub, :tipo => :poblacion, :lugar => :corunha, :ano => 2011}})
     :timer.sleep(5000)
 
+    GenServer.cast(:rec, {:validate, %{:texto => "Poboación total que naceu e vive na Coruña", :datanum => "500", :canal => Test2.PubSub, :tipo => :poblacion, :lugar => :corunha, :ano => 2011}})
+    :timer.sleep(5000)
+
+  #Comprobamos o resultado
     [head | tail] = resultados()
-    assert("Verdadeiro" == head)
+    assert("Falso" == head)
+
+    [h | t] = tail
+    assert("Verdadeiro" == h)
   end
 
 

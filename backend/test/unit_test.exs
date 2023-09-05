@@ -6,12 +6,15 @@ defmodule UnitTest do
 
   test "Os procesos seguen vivos tras recibir datos correctos" do
     IO.puts("TEST 1")
+
+    #Creamos canle pubsub para as probas
     children = [
       {Phoenix.PubSub, name: Test.PubSub}
     ]
     opts = [strategy: :one_for_one, name: :testsupervisor]
     Supervisor.start_link(children, opts)
 
+    #Arrancamos os procesos do pipeline sen supervisor
     Recepcion.new()
     pidr = Process.whereis(:rec)
 
@@ -24,9 +27,12 @@ defmodule UnitTest do
     Salida.new()
     pids = Process.whereis(:exit)
 
-    GenServer.cast(:rec, {:validate, %{:texto => "Tasa de paro total en España", :datanum => "12,7%", :canal => Test.PubSub, :tipo => :paro, :lugar => :espanha}})
+    #Enviamos datos validos
+    GenServer.cast(:rec, {:validate, %{:texto => "Tasa de paro total en España",
+     :datanum => "12,7%", :canal => Test.PubSub, :tipo => :paro, :lugar => :espanha}})
     :timer.sleep(5000)
     
+    #Comprobamos que os procesos seguen vivos
     assert (true == Process.alive?(pidr))
     assert (true == Process.alive?(pidd))
     assert (true == Process.alive?(pidi))
