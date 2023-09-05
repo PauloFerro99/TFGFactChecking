@@ -4,9 +4,8 @@ defmodule IntegrationTest do
   use GenServer
 
 
-  test "Saidas ige" do
+  test "Consultas" do
   #Creamos canle pubsub de test
-    IO.puts("TEST IGE")
     children = [
       {Phoenix.PubSub, name: Test2.PubSub}
     ]
@@ -23,6 +22,9 @@ defmodule IntegrationTest do
     IgeSup.new()
     pidi = Process.whereis(:ige)
 
+    DatosmacroSup.new()
+    pidda = Process.whereis(:datosmacro)
+
     SalidaSup.new()
     pids = Process.whereis(:exit)
 
@@ -38,12 +40,19 @@ defmodule IntegrationTest do
      :datanum => "500", :canal => Test2.PubSub, :tipo => :poblacion, :lugar => :corunha, :ano => 2011}})
     :timer.sleep(5000)
 
+    GenServer.cast(:rec, {:validate, %{:texto => "Tasa de paro total en España",
+     :datanum => "110%", :canal => Test2.PubSub, :tipo => :paro, :lugar => :espanha}})
+    :timer.sleep(5000)
+
   #Comprobamos o resultado
     [head | tail] = resultados()
     assert("Falso" == head)
 
     [h | t] = tail
-    assert("Verdadeiro" == h)
+    assert("Falso" == h)
+
+    [h1 | t1] = t
+    assert("Verdadeiro" == h1)
   end
 
 
