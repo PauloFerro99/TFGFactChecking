@@ -26,11 +26,16 @@ defmodule IntegrationTest do
     SalidaSup.new()
     pids = Process.whereis(:exit)
 
+  #Arrancamos o genserver de test
+    new()
+
   #Lanzamos as consultas
-    GenServer.cast(:rec, {:validate, %{:texto => "Poboación total que naceu e vive na Coruña", :datanum => "600831", :canal => Test2.PubSub, :tipo => :poblacion, :lugar => :corunha, :ano => 2011}})
+    GenServer.cast(:rec, {:validate, %{:texto => "Poboación total que naceu e vive na Coruña",
+     :datanum => "600831", :canal => Test2.PubSub, :tipo => :poblacion, :lugar => :corunha, :ano => 2011}})
     :timer.sleep(5000)
 
-    GenServer.cast(:rec, {:validate, %{:texto => "Poboación total que naceu e vive na Coruña", :datanum => "500", :canal => Test2.PubSub, :tipo => :poblacion, :lugar => :corunha, :ano => 2011}})
+    GenServer.cast(:rec, {:validate, %{:texto => "Poboación total que naceu e vive na Coruña",
+     :datanum => "500", :canal => Test2.PubSub, :tipo => :poblacion, :lugar => :corunha, :ano => 2011}})
     :timer.sleep(5000)
 
   #Comprobamos o resultado
