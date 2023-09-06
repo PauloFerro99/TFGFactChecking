@@ -5,7 +5,6 @@ defmodule UnitTest do
 
 
   test "Os procesos seguen vivos tras recibir datos correctos" do
-    IO.puts("TEST 1")
 
     #Creamos canle pubsub para as probas
     children = [
@@ -28,8 +27,9 @@ defmodule UnitTest do
     pids = Process.whereis(:exit)
 
     #Enviamos datos validos
-    GenServer.cast(:rec, {:validate, %{:texto => "Tasa de paro total en España",
-     :datanum => "12,7%", :canal => Test.PubSub, :tipo => :paro, :lugar => :espanha}})
+    GenServer.cast(:rec, {:validate, %{:texto => "Poboación total que naceu e vive na Coruña",
+     :datanum => "600831", :canal => Test.PubSub, :tipo => :poblacion,
+     :lugar => :corunha, :ano => 2011}})
     :timer.sleep(5000)
     
     #Comprobamos que os procesos seguen vivos
@@ -48,7 +48,6 @@ defmodule UnitTest do
 
 
   test "Os procesos morren tras recibir datos incorrectos" do
-    IO.puts("TEST 2")
 
     Recepcion.new()
     pidr = Process.whereis(:rec)
@@ -88,7 +87,6 @@ defmodule UnitTest do
 
 
   test "Os procesos seguen vivos tras recibir datos incorrectos mentres estan supervisados" do
-    IO.puts("TEST 3")
 
     RecepcionSup.new()
     pidr = Process.whereis(:rec)

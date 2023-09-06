@@ -5,33 +5,28 @@ defmodule IntegrationTest do
 
 
   test "Consultas" do
-  #Creamos canle pubsub de test
+    #Creamos canle pubsub de test
     children = [
       {Phoenix.PubSub, name: Test2.PubSub}
     ]
     opts = [strategy: :one_for_one, name: :testsupervisor]
     Supervisor.start_link(children, opts)
 
-  #Arrancamos os procesos do pipeline
+    #Arrancamos os procesos do pipeline
     RecepcionSup.new()
-    pidr = Process.whereis(:rec)
 
     DecisionSup.new()
-    pidd = Process.whereis(:busqueda)
 
     IgeSup.new()
-    pidi = Process.whereis(:ige)
 
     DatosmacroSup.new()
-    pidda = Process.whereis(:datosmacro)
 
     SalidaSup.new()
-    pids = Process.whereis(:exit)
 
-  #Arrancamos o genserver de test
+    #Arrancamos o genserver de test
     new()
 
-  #Lanzamos as consultas
+    #Lanzamos as consultas
     GenServer.cast(:rec, {:validate, %{:texto => "Poboación total que naceu e vive na Coruña",
      :datanum => "600831", :canal => Test2.PubSub, :tipo => :poblacion, :lugar => :corunha, :ano => 2011}})
     :timer.sleep(5000)
@@ -44,7 +39,7 @@ defmodule IntegrationTest do
      :datanum => "110%", :canal => Test2.PubSub, :tipo => :paro, :lugar => :espanha}})
     :timer.sleep(5000)
 
-  #Comprobamos o resultado
+    #Comprobamos o resultado
     [head | tail] = resultados()
     assert("Falso" == head)
 
