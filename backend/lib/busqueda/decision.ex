@@ -18,14 +18,14 @@ defmodule Decision do
     {:ok, 0}
   end
 
-  def handle_cast({:validate, afirmacion}, 0) do
+  def handle_cast({:validate, {state, afirmacion}}, 0) do
     case afirmacion[:tipo] do
-	:poblacion -> GenServer.cast(:ige, {:validate, afirmacion})
+	:poblacion -> GenServer.cast(:ige, {:validate, {state, afirmacion}})
 	:paro -> 
 		Logger.debug(
         		"[#{inspect(__MODULE__)}, process #{inspect(self())}] Recíbese petición #{inspect(afirmacion)}"
       		)		
-		GenServer.cast(:datosmacro, {:validate, afirmacion})
+		GenServer.cast(:datosmacro, {:validate, {state, afirmacion}})
     end
     {:noreply, 0}
   end

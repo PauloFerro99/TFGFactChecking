@@ -22,7 +22,7 @@ defmodule Datosmacro do
     {:ok, 0}
   end
 
-  def handle_cast({:validate, afirmacion}, 0) do
+  def handle_cast({:validate, {state, afirmacion}}, 0) do
     Logger.debug(
       "[#{inspect(__MODULE__)}, process #{inspect(self())}] Non se puido validar #{inspect(afirmacion)}"
     )
@@ -41,7 +41,7 @@ defmodule Datosmacro do
 	Logger.debug(
         	"[#{inspect(__MODULE__)}, process #{inspect(self())}] Recíbese petición #{inspect(afirmacion)}"
       	)	
-        GenServer.cast(:exit, {:validate, %{:texto => res, :canal => afirmacion[:canal], :datanum => afirmacion[:datanum]}})
+        GenServer.cast(:exit, {:validate, %{:texto => res, :n => state, :canal => afirmacion[:canal], :datanum => afirmacion[:datanum]}})
     end
     {:noreply, 0}
   end

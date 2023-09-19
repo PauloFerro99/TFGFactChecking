@@ -19,17 +19,17 @@ defmodule Recepcion do
   # Callbacks GenServer
 
   def init(0) do
-    {:ok, 0}
+    {:ok, 1}
   end
 
-  def handle_cast({:validate, afirmacion}, 0) do
+  def handle_cast({:validate, afirmacion}, state) do
     if is_binary(afirmacion[:texto]) do
       Logger.debug(
         "[#{inspect(__MODULE__)}, process #{inspect(self())}] Recíbese petición #{inspect(afirmacion)}"
       )
 
-      GenServer.cast(:busqueda, {:validate, afirmacion})
+      GenServer.cast(:busqueda, {:validate, {state, afirmacion}})
     end
-    {:noreply, 0}
+    {:noreply, state+1}
   end
 end
